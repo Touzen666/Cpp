@@ -1,0 +1,33 @@
+//klasa bazowa
+class pojazd
+{
+public:
+	int predkosc;
+	string numer_ser;
+	pojazd(int p = 0, string n = " ");
+	~pojazd();
+	void info();
+	void zapiszPredkosc(int p);
+	void zapiszNumery(string n);
+};
+pojazd::pojazd(int p, string n)
+{
+	numer_ser = n;
+	predkosc = p;
+}
+pojazd::~pojazd()
+{
+	cout << "Usuwanie pojazdu";
+}
+void pojazd::zapiszPredkosc(int p)
+{
+	predkosc = p;
+}
+void pojazd::zapiszNumery(string n)
+{
+	numer_ser = n;
+}
+void pojazd::info()
+{
+	cout << "Pojazd o numerach " << numer_ser << " osiaga predkosc " << predkosc << endl;
+}

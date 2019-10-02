@@ -1,0 +1,121 @@
+// ConsoleApplication1.cpp : Defines the entry point for the console application.
+//
+
+#include "stdafx.h"
+#include <iostream>
+#include <string>
+
+
+using namespace std;
+/*napisz klase osoba posiadajaca publiczne pola
+imie naziwsko wiek oraz metody: konstruktor z paramtetrami
+ZamienDane - metoda ma zamieniac odpowiednio pola klasy
+wypisz - metoda wypisujaca dane osoby
+pobierz - zwracajaca wiek osoby
+
+nastepnie zdefiniuj klase pochodna student z publicznymi polami 
+kierunek, rok, stypentium, czesne oraz metody
+konstrukoir z parametrami oraz metode wypisz, oblicz - oblicza 
+ile wyniesie koszt czesnego po odliczeniu stypenidum.
+*/
+
+class Osoba {
+public:
+	string imie, nazwisko;
+	int wiek;
+	Osoba(string imie, string nazwisko, int wiek);
+	void ZamienDane();
+	void Info();
+	int Pobierz();
+};
+
+class Student :Osoba {
+public:
+	string kierunek;
+	int rok;
+	bool stypendium;
+	float czesne, srednia;
+	Student(string imie, string nazwisko, int wiek, string kierunek,
+		int rok, float srednia, bool stypendium, float czesne);
+	void Info();
+	void Oblicz();
+};
+
+
+// metody Osoba
+Osoba::Osoba(string imie="Jan", string nazwisko= "Kowalski" , int wiek=19) {
+	this->imie = imie;
+	this->nazwisko = nazwisko;
+	this->wiek = wiek;
+}
+
+void Osoba::ZamienDane() {
+	cout << "Podaj imie: "; cin >> imie; this->imie = imie;
+	cout << "Podaj nazwisko: "; cin >> nazwisko; this->nazwisko = nazwisko;
+	cout << "Podaj wiek: "; cin >> wiek; this->wiek = wiek;
+}
+
+void Osoba::Info() {
+	cout << "Imie: " << imie << endl;
+	cout << "Nazwisko: " << nazwisko << endl;
+	cout << "Wiek: " << wiek << endl;
+}
+
+int Osoba::Pobierz() {
+	return wiek;
+}
+
+// metody student
+Student::Student(string imie= "", string nazwisko="", int wiek=0,
+	string kierunek= "", int rok=0, float srednia=0.0, bool stypendium=true, 
+	float czesne = 0):Osoba(imie, nazwisko, wiek){
+	this->kierunek = kierunek;
+	this->rok = rok;
+	this->stypendium = stypendium;
+	this->czesne = czesne;
+	this->srednia = srednia;
+}
+
+void Student::Info() {
+	Osoba::Info();
+	cout << "Kierunek: " << kierunek << endl;
+	cout << "Rok: " << rok << "\nSrednia: "<<srednia<<
+		"\nStypendium: " << stypendium << endl;
+	cout << "Czesne: "; 
+	Oblicz();
+}
+
+void Student::Oblicz() {
+	if (srednia > 4.0) {
+		stypendium = true;
+		czesne = czesne / 2;
+	}
+	else {
+		stypendium = false;
+		czesne = czesne;
+	}
+	cout << czesne << endl;
+}
+
+int main()
+{
+	//Osoba o1;
+	//o1.Info();
+	//cout << endl;
+	//cout<<"Wiek osoby: "<<o1.Pobierz()<<endl;
+	//o1.ZamienDane();
+	//cout << endl;
+	//o1.Info();
+	//cout << endl;
+
+	Student *s1 = new Student("Jan", "Kowalski", 21, "Informatyka", 2, 4.5, true, 400);
+
+	s1->Info();
+
+
+
+
+	system("pause");
+    return 0;
+}
+

@@ -1,0 +1,46 @@
+#include <iostream>
+
+using namespace std;
+
+
+int* rozszerz(int *tablica ,int size){
+    int rozmiarTablicy = 10;
+
+    if(rozmiarTablicy >= size){
+        return tablica;
+    }
+    
+    int* tablica2 = new int[size];
+    
+    for(int i= 0; i<size; i++){
+        if(i < rozmiarTablicy){
+            tablica2[i]=tablica[i];
+        } else {
+            tablica2[i]=0;
+        }
+    }
+    delete [] tablica;
+    
+    return tablica2;
+}
+
+
+
+
+int main()
+{
+    
+    int* tablica = new int[10];
+    
+    for(int i= 0;i<10;i++){
+        tablica[i]=i + 5;
+    }
+    
+    tablica = rozszerz(tablica, 50);
+    
+    for(int i =0; i <50;i++){
+    
+        cout<< tablica[i]<< " ";
+    }
+
+}
